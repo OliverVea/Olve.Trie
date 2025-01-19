@@ -228,28 +228,4 @@ public class Class1
             .That(trie.Count)
             .IsEqualTo(2);
     }
-
-    [Test]
-    public async Task Remove_ItemWithSharedPrefix_DoesNotAffectOthers()
-    {
-        // Arrange
-        var trie = new Trie { "stack", "stop", "apple" };
-
-        // Act
-        trie.Match("st");
-
-        // Assert
-        await Assert
-            .That(trie.Contains("test"))
-            .IsTrue();
-        await Assert
-            .That(trie.Contains("tester"))
-            .IsTrue();
-        await Assert
-            .That(trie.Contains("testing"))
-            .IsFalse();
-        await Assert
-            .That(trie.Count)
-            .IsEqualTo(2);
-    }
 }
