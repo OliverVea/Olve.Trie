@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Olve.Trie", "Olve.Trie\Olve.Trie.csproj", "{4028211C-2B94-4C84-8E5E-818B16F38AA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Olve.Trie.Tests", "Olve.Trie.Tests\Olve.Trie.Tests.csproj", "{E6F1AF9B-EAD5-4C79-8A8A-84CE7E0F4AF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "repo", "repo", "{74B3CBA9-0FFE-4909-A743-AB6D2DE5C2AA}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.cz.toml = .cz.toml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4028211C-2B94-4C84-8E5E-818B16F38AA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4028211C-2B94-4C84-8E5E-818B16F38AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4028211C-2B94-4C84-8E5E-818B16F38AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4028211C-2B94-4C84-8E5E-818B16F38AA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6F1AF9B-EAD5-4C79-8A8A-84CE7E0F4AF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6F1AF9B-EAD5-4C79-8A8A-84CE7E0F4AF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6F1AF9B-EAD5-4C79-8A8A-84CE7E0F4AF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6F1AF9B-EAD5-4C79-8A8A-84CE7E0F4AF9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
