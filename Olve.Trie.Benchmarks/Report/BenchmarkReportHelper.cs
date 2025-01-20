@@ -5,8 +5,7 @@ namespace Olve.Trie.Benchmarks.Report;
 
 public static partial class BenchmarkReportHelper
 {
-    private const string BenchmarkTemplatePath = "BenchmarkTemplate.md";
-
+    private const string BenchmarkTemplatePath = "./Report/BenchmarkTemplate.md";
     private const string BenchmarkEndMarker = "<!-- BENCHMARK_END -->";
 
     [GeneratedRegex("^<!--\\s*BENCHMARK_ID:\\s*\"([\\w,\\-]+)\"\\s*-->$")]
@@ -14,7 +13,15 @@ public static partial class BenchmarkReportHelper
 
     private const string SourceTemplate = "https://github.com/OliverVea/Olve.Trie/blob/{0}/Olve.Trie.Benchmarks/Benchmarks/{1}";
 
-    public static void ReportBenchmark(BenchmarkResults results, string benchmarksPath)
+    public static void ReportBenchmarkToReadme(BenchmarkResults results)
+    {
+        var root = GitHelper.GetRepoRoot();
+        var benchmarksPath = Path.Combine(root, "README.md");
+
+        ReportBenchmark(results, benchmarksPath);
+    }
+
+    private static void ReportBenchmark(BenchmarkResults results, string benchmarksPath)
     {
         var reportLines = File.ReadLines(BenchmarkTemplatePath).ToList();
         var gitHash = GitHelper.GetGitHash();
