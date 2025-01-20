@@ -1,6 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
+using Olve.Trie.Benchmarks.Report;
 
 namespace Olve.Trie.Benchmarks.Benchmarks;
 
@@ -40,6 +41,18 @@ public class ConstructTrieBenchmark
 
     public static Summary Run()
     {
-        return BenchmarkRunner.Run<ConstructTrieBenchmark>();
+        var summary = BenchmarkRunner.Run<ConstructTrieBenchmark>();
+
+        var results = new BenchmarkResults
+        {
+            Id = "construct-trie",
+            Title = "Construct Trie",
+            SourceFile = "ConstructTrieBenchmark.cs",
+            ResultsTable = summary.Table
+        };
+
+        BenchmarkReportHelper.ReportBenchmarkToReadme(results);
+
+        return summary;
     }
 }
