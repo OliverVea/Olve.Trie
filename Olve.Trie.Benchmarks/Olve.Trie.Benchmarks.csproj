@@ -23,4 +23,10 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="BenchmarkTemplate.md">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
