@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "repo", "repo", "{74B3CBA9-0
 		.gitignore = .gitignore
 		.cz.toml = .cz.toml
 		words_alpha.txt = words_alpha.txt
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Olve.Trie.Benchmarks", "Olve.Trie.Benchmarks\Olve.Trie.Benchmarks.csproj", "{3E5210FE-5333-4210-99B8-9C8ACE6F296D}"
