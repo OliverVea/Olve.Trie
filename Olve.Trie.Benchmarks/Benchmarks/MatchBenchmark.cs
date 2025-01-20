@@ -1,6 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
+using Olve.Trie.Benchmarks.Report;
 
 namespace Olve.Trie.Benchmarks.Benchmarks;
 
@@ -38,7 +39,7 @@ public class MatchBenchmark
         "ve"
     ];
 
-    [Params(300, 300_000)]
+    [Params(300, 10_000, 300_000)]
     public int WordCount { get; set; }
 
     [GlobalSetup]
@@ -100,7 +101,19 @@ public class MatchBenchmark
 
     public static Summary Run()
     {
-        return BenchmarkRunner.Run<MatchBenchmark>();
+        var summary = BenchmarkRunner.Run<MatchBenchmark>();
+
+        var results = new BenchmarkResults
+        {
+            Id = "prefix-match",
+            Title = "Prefix Match",
+            SourceFile = "MatchBenchmark.cs",
+            ResultsTable = summary.Table
+        };
+
+        BenchmarkReportHelper.ReportBenchmarkToReadme(results);
+
+        return summary;
     }
 
     public static void Main()
