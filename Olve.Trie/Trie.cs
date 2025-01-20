@@ -1,8 +1,10 @@
-﻿namespace Olve.Trie;
+﻿using System.Runtime.CompilerServices;
+
+namespace Olve.Trie;
 
 public sealed partial class Trie
 {
-    private readonly TrieNode _root = new();
+    private readonly TrieNode _root = new('\0');
 
     public int Count { get; private set; }
 
@@ -12,22 +14,73 @@ public sealed partial class Trie
 
         foreach (var ch in item)
         {
-            if (!node.TryGetChild(ch, out var child))
-            {
-                child = node.AddChild(ch);
-            }
-
-            node = child;
+            node = GetOrAddNode(node, ch);
         }
 
-        if (!node.IsWord)
+        if (node.Word is not null)
         {
-            node.Word = item.ToString();
-            Count++;
+            return;
+        }
+
+        node.Word = item.ToString();
+        Count++;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static TrieNode GetOrAddNode(TrieNode parent, char ch)
+    {
+        var index = ch % TrieNode.ChildCount;
+        var list = parent.Children[index];
+
+        if (list == null)
+        {
+            list = [];
+            parent.Children[index] = list;
+        }
+
+        foreach (var child in list)
+        {
+            if (child.Char == ch)
+            {
+                return child;
+            }
+        }
+
+        var node = new TrieNode(ch);
+        list.Add(node);
+
+        return node;
+    }
+
+    public void Clear()
+    {
+        foreach (var childList in _root.Children)
+        {
+            childList?.Clear();
         }
     }
 
-    public void Clear() => _root.Clear();
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static TrieNode? GetChild(TrieNode parent, char ch)
+    {
+        var index = ch % TrieNode.ChildCount;
+        var list = parent.Children[index];
+
+        if (list == null)
+        {
+            return null;
+        }
+
+        foreach (var child in list)
+        {
+            if (child.Char == ch)
+            {
+                return child;
+            }
+        }
+
+        return null;
+    }
 
     public bool Contains(ReadOnlySpan<char> item) => Contains(item, false);
     public bool ContainsPrefix(ReadOnlySpan<char> item) => Contains(item, true);
@@ -38,111 +91,126 @@ public sealed partial class Trie
 
         foreach (var ch in item)
         {
-            if (!node.TryGetChild(ch, out var child))
+            node = GetChild(node, ch);
+
+            if (node is null)
             {
                 return false;
             }
-
-            node = child;
         }
 
-        return matchPrefix || node.IsWord;
+        return matchPrefix || node.Word is not null;
     }
 
-    public IEnumerable<string> Match(ReadOnlySpan<char?> pattern) => Match(_root, pattern);
-    private static IEnumerable<string> Match(TrieNode node, ReadOnlySpan<char?> pattern)
-    {
-        if (pattern.IsEmpty)
-        {
-            if (node.Word is {} word)
-            {
-                return GetWords(node)
-                    .Prepend(word);
-            }
+    public IReadOnlyList<string> ListWithPrefix(string pattern) => ListWithPrefix(pattern.AsSpan());
 
-            return GetWords(node);
+    private IReadOnlyList<string> ListWithPrefix(ReadOnlySpan<char> prefix)
+    {
+        List<string> results = [];
+        var node = _root;
+
+        foreach (var ch in prefix)
+        {
+            node = GetChild(node, ch);
+
+            if (node is null)
+            {
+                return results;
+            }
         }
 
-        var nextPattern = pattern[1..];
+        ListWords(node, results);
 
-        if (pattern[0] is { } ch)
+        return results;
+    }
+
+    public IEnumerable<string> EnumerateWithPrefix(string pattern) => EnumerateWithPrefix(pattern.AsSpan());
+    public IEnumerable<string> EnumerateWithPrefix(ReadOnlySpan<char> prefix)
+    {
+        var node = FindNode(prefix);
+        if (node is null)
         {
-            if (node.TryGetChild(ch, out var child))
-            {
-                return Match(child, nextPattern);
-            }
-
             return [];
         }
 
-        IEnumerable<string> words = [];
-
-        foreach (var child in node.Children)
-        {
-            var nextWords = Match(child, nextPattern);
-            words = words.Concat(nextWords);
-        }
-
-        return words;
+        return EnumerateWords(node);
     }
 
-    public bool Remove(ReadOnlySpan<char> item)
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private TrieNode? FindNode(ReadOnlySpan<char> item)
     {
-        Stack<TrieNode> stack = new();
-
         var node = _root;
 
         foreach (var ch in item)
         {
-            if (!node.TryGetChild(ch, out var child))
+            node = GetChild(node, ch);
+
+            if (node is null)
             {
-                return false;
+                return null;
             }
-
-            stack.Push(node);
-            node = child;
         }
 
-        if (!node.IsWord)
-        {
-            return false;
-        }
+        return node;
+    }
 
-        node.Word = null;
-        stack.Push(node);
-
-        for (var i = item.Length - 1; i >= 0; i--)
-        {
-            var parent = stack.Pop();
-
-            parent.Remove(item[i]);
-
-            if (parent.Children.Count > 0 || parent.IsWord)
-            {
-                break;
-            }
-
-            parent.Clear();
-        }
-
-        Count--;
-        return true;
+    public bool Remove(ReadOnlySpan<char> item)
+    {
+        throw new NotImplementedException();
     }
 
 
-    public IEnumerable<string> Words => GetWords(_root);
-    private static IEnumerable<string> GetWords(TrieNode node)
+
+    private static List<string> ListWords(TrieNode node)
     {
-        if (node.IsWord)
+        List<string> words = [];
+        ListWords(node, words);
+        return words;
+    }
+
+    public IReadOnlyList<string> ListWords() => ListWords(_root);
+    private static void ListWords(TrieNode node, List<string> words)
+    {
+        if (node.Word is not null)
         {
-            yield return node.Word!;
+            words.Add(node.Word);
         }
 
-        foreach (var child in node.Children)
+        foreach (var childList in node.Children)
         {
-            foreach (var word in GetWords(child))
+            if (childList is null)
             {
-                yield return word;
+                continue;
+            }
+
+            foreach (var child in childList)
+            {
+                ListWords(child, words);
+            }
+        }
+    }
+
+    public IEnumerable<string> Words => EnumerateWords(_root);
+    private static IEnumerable<string> EnumerateWords(TrieNode node)
+    {
+        if (node.Word is not null)
+        {
+            yield return node.Word;
+        }
+
+        foreach (var childList in node.Children)
+        {
+            if (childList is null)
+            {
+                continue;
+            }
+
+            foreach (var child in childList)
+            {
+                foreach (var word in EnumerateWords(child))
+                {
+                    yield return word;
+                }
             }
         }
     }
