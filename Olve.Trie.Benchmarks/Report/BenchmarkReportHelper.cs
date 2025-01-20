@@ -39,7 +39,7 @@ public static partial class BenchmarkReportHelper
             .ReadLines(benchmarksPath)
             .ToList();
 
-        var idLine = benchmarksLines.FindIndex(line => BenchmarkIdPattern().IsMatch(line));
+        var idLine = benchmarksLines.FindIndex(line => BenchmarkIdPattern().IsMatch(line) && BenchmarkIdPattern().Match(line).Groups[1].Value == results.Id);
         var endLine = benchmarksLines.FindIndex(idLine, line => line.Contains(BenchmarkEndMarker));
 
         benchmarksLines.RemoveRange(idLine + 1, endLine - idLine - 1);
