@@ -7,4 +7,20 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
+      <PackageReference Include="KTrie" Version="2.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Olve.Trie\Olve.Trie.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\words_alpha.txt">
+        <Link>TestData\words_alpha.txt</Link>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

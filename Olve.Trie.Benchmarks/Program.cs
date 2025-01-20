@@ -1,3 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Olve.Trie.Benchmarks.Benchmarks;
 
-Console.WriteLine("Hello, World!");
+var constructResult = ConstructTrieBenchmark.Run();
+var matchResult = MatchBenchmark.Run();
