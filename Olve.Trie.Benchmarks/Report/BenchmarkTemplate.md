@@ -1,6 +1,4 @@
 
-### $Title
-
 Benchmark run $DateTime
 
 $ResultsTable

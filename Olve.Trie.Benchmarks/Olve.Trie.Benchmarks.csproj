@@ -24,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="BenchmarkTemplate.md">
+      <None Update="Report\BenchmarkTemplate.md">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
