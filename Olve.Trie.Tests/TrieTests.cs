@@ -1,9 +1,14 @@
-﻿using TUnit.Assertions.Enums;
+﻿using System.Runtime.CompilerServices;
+using Olve.Trie.Tests.Shared;
+using TUnit.Assertions.Enums;
 // ReSharper disable CollectionNeverUpdated.Local
 
 namespace Olve.Trie.Tests;
 
-public class Class1
+[InheritsTests]
+public class NaiveArrayTrieTests : TrieTests<NaiveArrayTrie>;
+
+public abstract class TrieTests<TTrie> where TTrie : ITrie, new()
 {
     [Test]
     public async Task Contains_AfterAddingItem_ReturnsTrue()
@@ -11,7 +16,7 @@ public class Class1
         // Arrange
         const string item = "hello";
 
-        var trie = new Trie { item };
+        var trie = new TTrie { item };
 
         // Act
         var actual = trie.Contains("hello");
@@ -26,7 +31,7 @@ public class Class1
     public async Task Contains_WithoutAddingItem_ReturnsFalse()
     {
         // Arrange
-        var trie = new Trie();
+        var trie = new TTrie();
 
         // Act
         var actual = trie.Contains("hello");
@@ -41,7 +46,7 @@ public class Class1
     public async Task GetEnumerator_AfterAddingItems_ReturnsAllItems()
     {
         // Arrange
-        var trie = new Trie { "hello", "world" };
+        var trie = new TTrie { "hello", "world" };
 
         // Act
         var actual = trie.ToList();
@@ -56,7 +61,7 @@ public class Class1
     public async Task Clear_AfterAddingItems_IsEmpty()
     {
         // Arrange
-        var trie = new Trie { "hello", "world" };
+        var trie = new TTrie { "hello", "world" };
 
         // Act
         trie.Clear();
@@ -71,7 +76,7 @@ public class Class1
     public async Task Count_AfterAddingItems_ReturnsNumberOfItems()
     {
         // Arrange
-        var trie = new Trie { "hello", "world" };
+        var trie = new TTrie { "hello", "world" };
 
         // Act
         var actual = trie.Count;
@@ -86,7 +91,7 @@ public class Class1
     public async Task Count_AfterRemovingItem_ReturnsNumberOfItems()
     {
         // Arrange
-        var trie = new Trie { "hello", "world" };
+        var trie = new TTrie { "hello", "world" };
 
         // Act
         trie.Remove("hello");
@@ -101,7 +106,7 @@ public class Class1
     public async Task Add_DuplicateItem_DoesNotIncreaseCount()
     {
         // Arrange
-        var trie = new Trie { "hello" };
+        var trie = new TTrie { "hello" };
 
         // Act
         trie.Add("hello");
@@ -116,7 +121,7 @@ public class Class1
     public async Task Remove_NonExistentItem_ReturnsFalse()
     {
         // Arrange
-        var trie = new Trie { "hello" };
+        var trie = new TTrie { "hello" };
 
         // Act
         var result = trie.Remove("world");
@@ -131,7 +136,7 @@ public class Class1
     public async Task Remove_ExistingItem_ReturnsTrueAndDecreasesCount()
     {
         // Arrange
-        var trie = new Trie { "hello", "world" };
+        var trie = new TTrie { "hello", "world" };
 
         // Act
         var result = trie.Remove("hello");
@@ -149,7 +154,7 @@ public class Class1
     public async Task Contains_PrefixOfExistingItem_ReturnsFalse()
     {
         // Arrange
-        var trie = new Trie { "hello" };
+        var trie = new TTrie { "hello" };
 
         // Act
         var result = trie.Contains("hell");
@@ -164,7 +169,7 @@ public class Class1
     public async Task Enumerator_WithNoItems_IsEmpty()
     {
         // Arrange
-        var trie = new Trie();
+        var trie = new TTrie();
 
         // Act
         var actual = trie.ToList();
@@ -179,7 +184,7 @@ public class Class1
     public async Task Clear_OnEmptyTrie_DoesNotThrow()
     {
         // Arrange
-        var trie = new Trie();
+        var trie = new TTrie();
 
         // Act
         trie.Clear();
@@ -194,7 +199,7 @@ public class Class1
     public async Task Add_MultipleItemsWithCommonPrefix_StoresCorrectly()
     {
         // Arrange
-        var trie = new Trie { "test", "testing", "tester" };
+        var trie = new TTrie { "test", "testing", "tester" };
 
         // Act
         var actual = trie.ToList();
@@ -209,7 +214,7 @@ public class Class1
     public async Task Remove_ItemWithSharedPrefix_DoesNotAffectOthers()
     {
         // Arrange
-        var trie = new Trie { "test", "testing", "tester" };
+        var trie = new TTrie { "test", "testing", "tester" };
 
         // Act
         trie.Remove("testing");

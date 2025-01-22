@@ -2,13 +2,8 @@
 
 namespace Olve.Trie;
 
-public sealed partial class Trie : ICollection<string>
+public abstract partial class Trie<TNode>
 {
-    public void Add(string item)
-    {
-        Add(item.AsSpan());
-    }
-
     public bool Contains(string item) => Contains(item.AsSpan(), false);
 
     public void CopyTo(string[] array, int arrayIndex)
@@ -19,10 +14,8 @@ public sealed partial class Trie : ICollection<string>
         }
     }
 
-    public bool Remove(string item) => Remove(item.AsSpan());
-
     public bool IsReadOnly => false;
 
-    public IEnumerator<string> GetEnumerator() => Words.GetEnumerator();
+    public IEnumerator<string> GetEnumerator() => ListWords().GetEnumerator();
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }
