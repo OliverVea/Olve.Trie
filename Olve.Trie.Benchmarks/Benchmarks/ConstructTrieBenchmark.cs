@@ -4,7 +4,7 @@ using Olve.Trie.Tests.Shared;
 namespace Olve.Trie.Benchmarks.Benchmarks;
 
 [MemoryDiagnoser]
-[Orderer(BenchmarkDotNet.Order.SummaryOrderPolicy.FastestToSlowest)]
+[InvocationCount(16)]
 public class ConstructTrieBenchmark
 {
     private string[] _allWords = null!;

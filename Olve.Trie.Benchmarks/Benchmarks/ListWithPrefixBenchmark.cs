@@ -4,7 +4,7 @@ using Olve.Trie.Tests.Shared;
 namespace Olve.Trie.Benchmarks.Benchmarks;
 
 [MemoryDiagnoser]
-[Orderer(BenchmarkDotNet.Order.SummaryOrderPolicy.FastestToSlowest)]
+[InvocationCount(16)]
 public class ListWithPrefixBenchmark
 {
     private string[] _allWords = null!;
@@ -64,20 +64,6 @@ public class ListWithPrefixBenchmark
     }
 
     [Benchmark(Baseline = true)]
-    public List<IReadOnlyList<string>> Olve_NaiveArrayTrie_ListWithPrefix()
-    {
-        var results = new List<IReadOnlyList<string>>();
-
-        foreach (var prefix in _prefixes)
-        {
-            var matches = _olveNaiveArrayTrie.ListWithPrefix(prefix);
-            results.Add(matches);
-        }
-
-        return results;
-    }
-
-    [Benchmark(Baseline = false)]
     public List<IReadOnlyList<string>> KTrie_StartsWith()
     {
         var results = new List<IReadOnlyList<string>>();
@@ -85,6 +71,20 @@ public class ListWithPrefixBenchmark
         foreach (var prefix in _prefixes)
         {
             var matches = _kTrie.StartsWith(prefix).ToList();
+            results.Add(matches);
+        }
+
+        return results;
+    }
+
+    [Benchmark]
+    public List<IReadOnlyList<string>> Olve_NaiveArrayTrie_ListWithPrefix()
+    {
+        var results = new List<IReadOnlyList<string>>();
+
+        foreach (var prefix in _prefixes)
+        {
+            var matches = _olveNaiveArrayTrie.ListWithPrefix(prefix);
             results.Add(matches);
         }
 
