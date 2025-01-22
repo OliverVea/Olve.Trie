@@ -16,37 +16,38 @@ Benchmarks are a comparison between:
 ### Initialization
 <!-- BENCHMARK_ID: "construct-trie" -->
 
-Benchmark run 2025-01-20 14.59.16
+Benchmark run 2025-01-22 13.13.02
 
-| Method | WordCount | Mean | Error | StdDev | Ratio | RatioSD | Gen0 | Gen1 | Gen2 | Allocated | Alloc Ratio |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| KTrie | 300 | 92.54 μs | 3.387 μs | 8.923 μs | 1.01 | 0.13 | - | - | - | 150.11 KB | 1.00 |
-| Olve | 300 | 365.98 μs | 7.077 μs | 19.253 μs | 3.99 | 0.41 | - | - | - | 800.3 KB | 5.33 |
-| KTrie | 10000 | 2,614.24 μs | 58.645 μs | 171.071 μs | 1.01 | 0.11 | - | - | - | 3869.32 KB | 1.00 |
-| Olve | 10000 | 7,001.81 μs | 138.161 μs | 269.472 μs | 2.69 | 0.25 | 1000.0000 | - | - | 20298.47 KB | 5.25 |
-| KTrie | 300000 | 221,452.27 μs | 4,422.978 μs | 7,746.491 μs | 1.00 | 0.05 | 4000.0000 | 3000.0000 | 1000.0000 | 69322.13 KB | 1.00 |
-| Olve | 300000 | 717,817.23 μs | 14,259.600 μs | 30,388.372 μs | 3.25 | 0.18 | 20000.0000 | 19000.0000 | 3000.0000 | 325363.39 KB | 4.69 |
+| Method | WordCount | Mean | Error | StdDev | Median | Ratio | RatioSD | Gen0 | Gen1 | Gen2 | Allocated | Alloc Ratio |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| KTrie | 300 | 111.8 μs | 14.14 μs | 41.69 μs | 88.25 μs | 1.11 | 0.52 | - | - | - | 150.11 KB | 1.00 |
+| Olve_NaiveArrayTrie | 300 | 151.7 μs | 7.12 μs | 20.76 μs | 158.75 μs | 1.51 | 0.47 | - | - | - | 165.47 KB | 1.10 |
+| Olve_NaiveArrayTrie | 10000 | 2,581.8 μs | 57.78 μs | 168.55 μs | 2,571.20 μs | 0.89 | 0.06 | - | - | - | 4211.58 KB | 1.09 |
+| KTrie | 10000 | 2,916.7 μs | 55.35 μs | 49.07 μs | 2,910.70 μs | 1.00 | 0.02 | - | - | - | 3869.32 KB | 1.00 |
+| Olve_NaiveArrayTrie | 300000 | 204,077.9 μs | 4,058.09 μs | 10,106.06 μs | 204,323.50 μs | 0.73 | 0.13 | 4000.0000 | 3000.0000 | 1000.0000 | 67239.08 KB | 0.97 |
+| KTrie | 300000 | 288,810.9 μs | 15,362.73 μs | 45,297.35 μs | 305,420.40 μs | 1.03 | 0.25 | 4000.0000 | 3000.0000 | 1000.0000 | 69322.47 KB | 1.00 |
 
 
-*[source](https://github.com/OliverVea/Olve.Trie/blob/638fe352a69452f957c0bc69c4807c7dc3c143ea/Olve.Trie.Benchmarks/Benchmarks/ConstructTrieBenchmark.cs)*
+*[source](https://github.com/OliverVea/Olve.Trie/blob/a1eadffddf15961525d03a1edc29a1ba49a23477/Olve.Trie.Benchmarks/Benchmarks/ConstructTrieBenchmark.cs)*
 <!-- BENCHMARK_END -->
 
 ### Prefix Match
-<!-- BENCHMARK_ID: "prefix-match" -->
-Benchmark run 2025-01-20 14.56.28
+<!-- BENCHMARK_ID: "list-with-prefix" -->
+
+Benchmark run 2025-01-22 13.14.59
 
 | Method | WordCount | Mean | Error | StdDev | Median | Ratio | RatioSD | Allocated | Alloc Ratio |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| KTrie | 300 | 21.73 μs | 2.420 μs | 6.865 μs | 18.40 μs | 1.08 | 0.44 | 4.84 KB | 1.00 |
-| Olve_List | 300 | 52.24 μs | 2.113 μs | 6.164 μs | 51.15 μs | 2.60 | 0.70 | 2.13 KB | 0.44 |
-| Olve_Enumerate | 300 | 100.32 μs | 6.232 μs | 18.278 μs | 106.20 μs | 4.98 | 1.52 | 43.47 KB | 8.99 |
-| KTrie | 10000 | 134.16 μs | 4.395 μs | 12.397 μs | 130.20 μs | 1.01 | 0.13 | 36.3 KB | 1.00 |
-| Olve_List | 10000 | 491.58 μs | 22.514 μs | 66.029 μs | 495.90 μs | 3.69 | 0.59 | 40.36 KB | 1.11 |
-| Olve_Enumerate | 10000 | 850.91 μs | 23.830 μs | 69.136 μs | 836.60 μs | 6.39 | 0.75 | 966.53 KB | 26.63 |
-| KTrie | 300000 | 9,060.82 μs | 648.405 μs | 1,891.427 μs | 9,736.20 μs | 1.06 | 0.36 | 540.24 KB | 1.00 |
-| Olve_List | 300000 | 12,922.32 μs | 255.049 μs | 570.455 μs | 12,962.65 μs | 1.51 | 0.40 | 1103.67 KB | 2.04 |
-| Olve_Enumerate | 300000 | 21,377.13 μs | 426.857 μs | 1,022.722 μs | 21,600.20 μs | 2.49 | 0.67 | 15317.36 KB | 28.35 |
+| Olve_NaiveArrayTrie_ListWithPrefix | 300 | 21.23 μs | 1.399 μs | 3.783 μs | 21.00 μs | 1.03 | 0.27 | 14.94 KB | 1.00 |
+| Olve_NaiveArrayTrie_EnumerateWithPrefix | 300 | 31.45 μs | 5.095 μs | 14.701 μs | 24.15 μs | 1.53 | 0.78 | 17.32 KB | 1.16 |
+| KTrie_StartsWith | 300 | 38.64 μs | 3.912 μs | 11.473 μs | 37.15 μs | 1.88 | 0.67 | 7.2 KB | 0.48 |
+| KTrie_StartsWith | 10000 | 149.75 μs | 3.914 μs | 10.447 μs | 147.80 μs | 0.82 | 0.14 | 52.63 KB | 0.17 |
+| Olve_NaiveArrayTrie_ListWithPrefix | 10000 | 188.28 μs | 11.838 μs | 33.196 μs | 179.40 μs | 1.03 | 0.24 | 306.13 KB | 1.00 |
+| Olve_NaiveArrayTrie_EnumerateWithPrefix | 10000 | 230.60 μs | 11.616 μs | 32.953 μs | 231.70 μs | 1.26 | 0.27 | 313.58 KB | 1.02 |
+| KTrie_StartsWith | 300000 | 6,017.37 μs | 114.498 μs | 160.510 μs | 6,006.00 μs | 0.79 | 0.04 | 983.35 KB | 0.20 |
+| Olve_NaiveArrayTrie_ListWithPrefix | 300000 | 7,656.72 μs | 151.389 μs | 319.332 μs | 7,715.75 μs | 1.00 | 0.06 | 4826.84 KB | 1.00 |
+| Olve_NaiveArrayTrie_EnumerateWithPrefix | 300000 | 7,708.23 μs | 68.620 μs | 57.301 μs | 7,724.00 μs | 1.01 | 0.04 | 4840.7 KB | 1.00 |
 
 
-*[source](https://github.com/OliverVea/Olve.Trie/blob/638fe352a69452f957c0bc69c4807c7dc3c143ea/Olve.Trie.Benchmarks/Benchmarks/MatchBenchmark.cs)*
+*[source](https://github.com/OliverVea/Olve.Trie/blob/a1eadffddf15961525d03a1edc29a1ba49a23477/Olve.Trie.Benchmarks/Benchmarks/ListWithPrefixBenchmark.cs)*
 <!-- BENCHMARK_END -->
