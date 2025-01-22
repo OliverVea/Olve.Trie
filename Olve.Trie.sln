@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Olve.Trie", "Olve.Trie\Olve.Trie.csproj", "{4028211C-2B94-4C84-8E5E-818B16F38AA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Olve.Trie.Tests", "Olve.Trie.Tests\Olve.Trie.Tests.csproj", "{E6F1AF9B-EAD5-4C79-8A8A-84CE7E0F4AF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Olve.Trie.Tests", "tests\Olve.Trie.Tests\Olve.Trie.Tests.csproj", "{E6F1AF9B-EAD5-4C79-8A8A-84CE7E0F4AF9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "repo", "repo", "{74B3CBA9-0FFE-4909-A743-AB6D2DE5C2AA}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,11 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "repo", "repo", "{74B3CBA9-0
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Olve.Trie.Benchmarks", "Olve.Trie.Benchmarks\Olve.Trie.Benchmarks.csproj", "{3E5210FE-5333-4210-99B8-9C8ACE6F296D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Olve.Trie.Benchmarks", "tests\Olve.Trie.Benchmarks\Olve.Trie.Benchmarks.csproj", "{3E5210FE-5333-4210-99B8-9C8ACE6F296D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Olve.Trie.Profiling", "Olve.Trie.Profiling\Olve.Trie.Profiling.csproj", "{57444620-9EC8-4914-B889-FEFD806B1B48}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Olve.Trie.Profiling", "tests\Olve.Trie.Profiling\Olve.Trie.Profiling.csproj", "{57444620-9EC8-4914-B889-FEFD806B1B48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Olve.Trie.Tests.Shared", "Olve.Trie.Tests.Shared\Olve.Trie.Tests.Shared.csproj", "{C80CE9CE-7FF3-4709-BFBA-30DA5AD3C567}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Olve.Trie.Tests.Shared", "tests\Olve.Trie.Tests.Shared\Olve.Trie.Tests.Shared.csproj", "{C80CE9CE-7FF3-4709-BFBA-30DA5AD3C567}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
