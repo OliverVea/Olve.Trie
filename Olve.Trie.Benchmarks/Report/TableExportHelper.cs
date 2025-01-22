@@ -1,7 +1,7 @@
 using System.Text;
 using BenchmarkDotNet.Reports;
 
-namespace Olve.Trie.Benchmarks.Benchmarks;
+namespace Olve.Trie.Benchmarks.Report;
 
 public static class TableExportHelper
 {
