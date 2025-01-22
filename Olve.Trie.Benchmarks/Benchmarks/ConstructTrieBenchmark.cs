@@ -1,7 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Reports;
-using BenchmarkDotNet.Running;
-using Olve.Trie.Benchmarks.Report;
+using Olve.Trie.Tests.Shared;
 
 namespace Olve.Trie.Benchmarks.Benchmarks;
 
@@ -34,25 +32,8 @@ public class ConstructTrieBenchmark
     }
 
     [Benchmark]
-    public Trie Olve()
+    public NaiveArrayTrie Olve_NaiveArrayTrie()
     {
         return [.._words];
-    }
-
-    public static Summary Run()
-    {
-        var summary = BenchmarkRunner.Run<ConstructTrieBenchmark>();
-
-        var results = new BenchmarkResults
-        {
-            Id = "construct-trie",
-            Title = "Construct Trie",
-            SourceFile = "ConstructTrieBenchmark.cs",
-            ResultsTable = summary.Table
-        };
-
-        BenchmarkReportHelper.ReportBenchmarkToReadme(results);
-
-        return summary;
     }
 }

@@ -1,18 +1,16 @@
 ﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Reports;
-using BenchmarkDotNet.Running;
-using Olve.Trie.Benchmarks.Report;
+using Olve.Trie.Tests.Shared;
 
 namespace Olve.Trie.Benchmarks.Benchmarks;
 
 [MemoryDiagnoser]
 [Orderer(BenchmarkDotNet.Order.SummaryOrderPolicy.FastestToSlowest)]
-public class MatchBenchmark
+public class ListWithPrefixBenchmark
 {
     private string[] _allWords = null!;
     private string[] _words = null!;
 
-    private Trie _olveTrie = null!;
+    private NaiveArrayTrie _olveNaiveArrayTrie = null!;
     private KTrie.Trie _kTrie = null!;
 
     private readonly string[] _prefixes =
@@ -53,71 +51,57 @@ public class MatchBenchmark
     {
         _words = _allWords[.. WordCount];
 
-        _olveTrie = [.._words];
+        _olveNaiveArrayTrie = [.._words];
         _kTrie = [.._words];
     }
 
+    [IterationCleanup]
+    public void Cleanup()
+    {
+        _words = [];
+        _olveNaiveArrayTrie = null!;
+        _kTrie = null!;
+    }
+
     [Benchmark(Baseline = true)]
-    public int KTrie()
+    public List<IReadOnlyList<string>> Olve_NaiveArrayTrie_ListWithPrefix()
     {
-        var count = 0;
+        var results = new List<IReadOnlyList<string>>();
 
         foreach (var prefix in _prefixes)
         {
-            var wordResults = _kTrie.StartsWith(prefix);
-            count += wordResults.Count();
+            var matches = _olveNaiveArrayTrie.ListWithPrefix(prefix);
+            results.Add(matches);
         }
 
-        return count;
+        return results;
+    }
+
+    [Benchmark(Baseline = false)]
+    public List<IReadOnlyList<string>> KTrie_StartsWith()
+    {
+        var results = new List<IReadOnlyList<string>>();
+
+        foreach (var prefix in _prefixes)
+        {
+            var matches = _kTrie.StartsWith(prefix).ToList();
+            results.Add(matches);
+        }
+
+        return results;
     }
 
     [Benchmark]
-    public int Olve_List()
+    public List<IReadOnlyList<string>> Olve_NaiveArrayTrie_EnumerateWithPrefix()
     {
-        var count = 0;
+        var results = new List<IReadOnlyList<string>>();
 
         foreach (var prefix in _prefixes)
         {
-            var matches = _olveTrie.ListWithPrefix(prefix);
-            count += matches.Count;
+            var matches = _olveNaiveArrayTrie.EnumerateWithPrefix(prefix).ToList();
+            results.Add(matches);
         }
 
-        return count;
-    }
-
-    [Benchmark]
-    public int Olve_Enumerate()
-    {
-        var count = 0;
-
-        foreach (var prefix in _prefixes)
-        {
-            var matches = _olveTrie.EnumerateWithPrefix(prefix);
-            count += matches.Count();
-        }
-
-        return count;
-    }
-
-    public static Summary Run()
-    {
-        var summary = BenchmarkRunner.Run<MatchBenchmark>();
-
-        var results = new BenchmarkResults
-        {
-            Id = "prefix-match",
-            Title = "Prefix Match",
-            SourceFile = "MatchBenchmark.cs",
-            ResultsTable = summary.Table
-        };
-
-        BenchmarkReportHelper.ReportBenchmarkToReadme(results);
-
-        return summary;
-    }
-
-    public static void Main()
-    {
-        Run();
+        return results;
     }
 }
