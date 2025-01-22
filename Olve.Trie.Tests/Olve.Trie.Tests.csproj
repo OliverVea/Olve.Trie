@@ -10,6 +10,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Olve.Trie.Tests.Shared\Olve.Trie.Tests.Shared.csproj" />
         <ProjectReference Include="..\Olve.Trie\Olve.Trie.csproj"/>
     </ItemGroup>
 

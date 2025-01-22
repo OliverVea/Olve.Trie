@@ -1,4 +1,4 @@
-﻿namespace Olve.Trie.Profiling;
+﻿namespace Olve.Trie.Tests.Shared;
 
 public static class TestDataHelper
 {
