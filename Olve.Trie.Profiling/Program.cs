@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using Olve.Trie;
-using Olve.Trie.Profiling;
+using Olve.Trie.Tests.Shared;
 
 var words = TestDataHelper.GetTestData()[..10_000];
 
@@ -13,9 +13,9 @@ Console.WriteLine(count);
 return;
 
 [MethodImpl(MethodImplOptions.NoInlining)]
-static Trie NewTrie(string[] words)
+static NaiveArrayTrie NewTrie(string[] words)
 {
-    var trie = new Trie();
+    var trie = new NaiveArrayTrie();
 
     foreach (var word in words)
     {
@@ -26,7 +26,7 @@ static Trie NewTrie(string[] words)
 }
 
 [MethodImpl(MethodImplOptions.NoInlining)]
-static int ListWithPrefix(Trie trie, string[] words)
+static int ListWithPrefix(NaiveArrayTrie trie, string[] words)
 {
     var random = new Random(0);
     var count = 0;
@@ -47,7 +47,7 @@ static int ListWithPrefix(Trie trie, string[] words)
 }
 
 [MethodImpl(MethodImplOptions.NoInlining)]
-static int Contains(Trie trie, string[] words)
+static int Contains(NaiveArrayTrie trie, string[] words)
 {
     var random = new Random(0);
     var count = 0;
