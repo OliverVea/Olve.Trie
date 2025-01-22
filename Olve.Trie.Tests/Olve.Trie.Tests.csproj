@@ -6,11 +6,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="TUnit" Version="0.6.159" />
+        <PackageReference Include="TUnit" Version="0.6.159"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Olve.Trie.Tests.Shared\Olve.Trie.Tests.Shared.csproj" />
+        <ProjectReference Include="..\Olve.Trie.Tests.Shared\Olve.Trie.Tests.Shared.csproj"/>
         <ProjectReference Include="..\Olve.Trie\Olve.Trie.csproj"/>
     </ItemGroup>
 
