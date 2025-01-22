@@ -233,4 +233,23 @@ public abstract class TrieTests<TTrie> where TTrie : ITrie, new()
             .That(trie.Count)
             .IsEqualTo(2);
     }
+
+    [Test]
+    public async Task NewTrie_WithWordsAlpha_ReturnsCorrectCount()
+    {
+        // Arrange
+        var words = TestDataHelper.GetTestData();
+        var expected = words.Length;
+        TTrie trie = [..words];
+
+        // Act
+        var actual = trie.Count;
+
+        // Assert
+        await Assert
+            .That(actual)
+            .IsEqualTo(expected);
+
+    }
+
 }
