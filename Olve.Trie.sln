@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Olve.Trie.Profiling", "test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Olve.Trie.Tests.Shared", "tests\Olve.Trie.Tests.Shared\Olve.Trie.Tests.Shared.csproj", "{C80CE9CE-7FF3-4709-BFBA-30DA5AD3C567}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B9D236C3-163A-4FFD-AD76-2CBB8F3E696A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,11 @@ Global
 		{C80CE9CE-7FF3-4709-BFBA-30DA5AD3C567}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C80CE9CE-7FF3-4709-BFBA-30DA5AD3C567}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C80CE9CE-7FF3-4709-BFBA-30DA5AD3C567}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3E5210FE-5333-4210-99B8-9C8ACE6F296D} = {B9D236C3-163A-4FFD-AD76-2CBB8F3E696A}
+		{57444620-9EC8-4914-B889-FEFD806B1B48} = {B9D236C3-163A-4FFD-AD76-2CBB8F3E696A}
+		{E6F1AF9B-EAD5-4C79-8A8A-84CE7E0F4AF9} = {B9D236C3-163A-4FFD-AD76-2CBB8F3E696A}
+		{C80CE9CE-7FF3-4709-BFBA-30DA5AD3C567} = {B9D236C3-163A-4FFD-AD76-2CBB8F3E696A}
 	EndGlobalSection
 EndGlobal
