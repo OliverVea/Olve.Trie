@@ -6,6 +6,7 @@ IBenchmark[] benchmarks = [
     new Benchmark<ConstructTrieBenchmark>("construct-trie", "Initialization"),
     new Benchmark<ListWithPrefixBenchmark>("list-with-prefix", "Prefix Match"),
     new Benchmark<EnumerateTopKWithPrefixBenchmark>("enumerate-k-prefix", "Top K Prefix Match"),
+    new Benchmark<ContainsBenchmark>("contains", "Contains"),
 ];
 
 
