@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Olve.Trie.Tests.Shared;
+﻿using Olve.Trie.Tests.Shared;
 using TUnit.Assertions.Enums;
 // ReSharper disable CollectionNeverUpdated.Local
 
